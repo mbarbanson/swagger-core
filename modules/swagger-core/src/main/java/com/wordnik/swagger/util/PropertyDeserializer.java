@@ -27,7 +27,7 @@ public class PropertyDeserializer extends JsonDeserializer<Property> {
 
     Double minimum = null, maximum = null, exclusiveMinimum = null, exclusiveMaximum = null;
 
-    Boolean uniqueItems = null;
+    Boolean uniqueItems = null, readOnly = null;
     // externalDocs
     // example
     JsonNode detailNode = node.get("example");
@@ -113,7 +113,13 @@ public class PropertyDeserializer extends JsonDeserializer<Property> {
     detailNode = node.get("uniqueItems");
     if(detailNode != null)
       uniqueItems = (Boolean) ((BooleanNode) detailNode).booleanValue();
+    detailNode = node.get("readOnly");
+    if(detailNode != null) {
+        readOnly = detailNode.asBoolean();     
+    }
+   	
 
+    
     Map<String, Object> args = new HashMap<String, Object>();
     args.put("example", example);
     args.put("enum", _enum);
@@ -135,6 +141,7 @@ public class PropertyDeserializer extends JsonDeserializer<Property> {
     args.put("exclusiveMinimum", exclusiveMinimum);
     args.put("exclusiveMaximum", exclusiveMinimum);
     args.put("uniqueItems", uniqueItems);
+    args.put("readOnly", readOnly);
 
     detailNode = node.get("$ref");
     if(detailNode != null) {

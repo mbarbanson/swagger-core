@@ -1,5 +1,6 @@
 package com.wordnik.swagger.models.properties;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wordnik.swagger.models.Xml;
 
 public abstract class AbstractProperty implements Property {
@@ -9,9 +10,11 @@ public abstract class AbstractProperty implements Property {
   String example;
   Xml xml;
   boolean required;
+  boolean readOnly;  
   Integer position;
   String description;
   String title;
+  String defaultValue;
 
   public Property title(String title) {
     this.setTitle(title);
@@ -20,6 +23,18 @@ public abstract class AbstractProperty implements Property {
   public Property description(String description) {
     this.setDescription(description);
     return this;
+  }
+  
+  public Property defaultValue(String defaultValue) {
+    this.setDefaultValue(defaultValue);
+    return this;
+  }
+  
+  public String getDefaultValue() {
+    return this.defaultValue;
+  }
+  public void setDefaultValue(String defaultValue) {
+    this.defaultValue = defaultValue;
   }
 
   public String getName() {
@@ -69,6 +84,13 @@ public abstract class AbstractProperty implements Property {
   }
   public void setRequired(boolean required) {
     this.required = required;
+  }
+  
+  public boolean getReadOnly() {
+    return readOnly;
+  }
+  public void setReadOnly(boolean required) {
+    this.readOnly = required;
   }
 
   public String getTitle() {

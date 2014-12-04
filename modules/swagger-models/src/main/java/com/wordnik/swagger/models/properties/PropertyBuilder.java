@@ -23,6 +23,7 @@ public class PropertyBuilder {
     Double exclusiveMinimum = (Double)args.get("exclusiveMinimum");
     Double exclusiveMaximum = (Double)args.get("exclusiveMaximum");
     Boolean uniqueItems = (Boolean)args.get("uniqueItems");
+    Boolean readOnly = (Boolean)args.get("readOnly");
 
     AbstractProperty property = null;
     if(BooleanProperty.isType(type, format))
@@ -81,7 +82,10 @@ public class PropertyBuilder {
     if(property != null) {
       property
         .title(title)
-        .description(description);
+        .description(description)
+        .defaultValue(_default);
+      if (readOnly != null)
+    	  property.readOnly = readOnly;
       String example = (String)args.get("example");
       if (example != null) {
         property.setExample(example);
