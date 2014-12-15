@@ -16,7 +16,41 @@ class ModelConverterTest extends FlatSpec with Matchers {
 
   it should "convert a model" in {
     val schemas = ModelConverters.read(classOf[Person])
-    m.writeValueAsString(schemas) should equal ("""{"Person":{"properties":{"id":{"type":"integer","format":"int64"},"firstName":{"type":"string"},"address":{"$ref":"Address"},"properties":{"type":"object","additionalProperties":{"type":"string"}},"birthDate":{"type":"string","format":"date-time"},"float":{"type":"number","format":"float"},"double":{"type":"number","format":"double"}}}}""")
+    Json.pretty(schemas) should equal(
+"""{
+  "Person" : {
+    "properties" : {
+      "id" : {
+        "type" : "integer",
+        "format" : "int64"
+      },
+      "firstName" : {
+        "type" : "string"
+      },
+      "address" : {
+        "$ref" : "Address"
+      },
+      "properties" : {
+        "type" : "object",
+        "additionalProperties" : {
+          "type" : "string"
+        }
+      },
+      "birthDate" : {
+        "type" : "string",
+        "format" : "date-time"
+      },
+      "float" : {
+        "type" : "number",
+        "format" : "float"
+      },
+      "double" : {
+        "type" : "number",
+        "format" : "double"
+      }
+    }
+  }
+}""")
   }
 
   it should "convert a model with Joda DateTime" in {
@@ -29,15 +63,21 @@ class ModelConverterTest extends FlatSpec with Matchers {
     Json.pretty(schemas) should equal (
 """{
   "Pet" : {
+    "required" : [ "isDomestic", "name", "type" ],
     "properties" : {
-      "name" : {
-        "type" : "string"
-      },
       "type" : {
-        "type" : "string"
+        "type" : "string",
+        "position" : 1,
+        "description" : "The pet type"
+      },
+      "name" : {
+        "type" : "string",
+        "position" : 2,
+        "description" : "The name of the pet"
       },
       "isDomestic" : {
-        "type" : "boolean"
+        "type" : "boolean",
+        "position" : 3
       }
     }
   }
@@ -49,19 +89,25 @@ class ModelConverterTest extends FlatSpec with Matchers {
     Json.pretty(schemas) should equal (
 """{
   "Cat" : {
+    "required" : [ "isDomestic", "name", "type" ],
     "properties" : {
       "clawCount" : {
         "type" : "integer",
         "format" : "int32"
       },
-      "name" : {
-        "type" : "string"
-      },
       "type" : {
-        "type" : "string"
+        "type" : "string",
+        "position" : 1,
+        "description" : "The pet type"
+      },
+      "name" : {
+        "type" : "string",
+        "position" : 2,
+        "description" : "The name of the pet"
       },
       "isDomestic" : {
-        "type" : "boolean"
+        "type" : "boolean",
+        "position" : 3
       }
     }
   }

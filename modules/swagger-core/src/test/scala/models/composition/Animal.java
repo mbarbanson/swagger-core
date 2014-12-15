@@ -15,7 +15,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
   @Type(value = Pet.class, name = "pet")
 })
 public interface Animal {
-  @ApiModelProperty(required = true, value = "The name of the human")
   String getName();
   void setName(String name);
 

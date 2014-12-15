@@ -85,15 +85,21 @@ class ScalaModelTest extends FlatSpec with Matchers {
     Json.pretty(schemas) should equal (
 """{
   "Pet" : {
+    "required" : [ "isDomestic", "name", "type" ],
     "properties" : {
-      "name" : {
-        "type" : "string"
-      },
       "type" : {
-        "type" : "string"
+        "type" : "string",
+        "position" : 1,
+        "description" : "The pet type"
+      },
+      "name" : {
+        "type" : "string",
+        "position" : 2,
+        "description" : "The name of the pet"
       },
       "isDomestic" : {
-        "type" : "boolean"
+        "type" : "boolean",
+        "position" : 3
       }
     }
   }
