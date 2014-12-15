@@ -154,7 +154,10 @@ public class PropertyDeserializer extends JsonDeserializer<Property> {
       if(detailNode != null) {
         Property items = propertyFromNode(detailNode);
         if(items != null) {
-          return new MapProperty(items).description(description);
+          return new MapProperty(items)
+          	.description(description)
+          	.title(title)
+          	.defaultValue(_default);
         }
       }
     }
